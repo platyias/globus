@@ -10,6 +10,5 @@ cd /data/CGibbs && \
 make && \
 cd /data/scripts && \
 javac GeneClusteringSplitTL.java && \
-pip install numpy pandas
-
-
+pip install numpy && \
+pip install pandas
