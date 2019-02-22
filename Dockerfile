@@ -5,7 +5,7 @@ WORKDIR  /data
 ADD . /data
 ENV CLASSPATH /data/scripts
 RUN apt-get update && \
-apt-get -y --no-install-recommends install g++ default-jdk make nano libpython2.7 python2.7 python-pip python-dev && \
+apt-get -y --no-install-recommends install g++ default-jdk make nano libpython2.7 python2.7 python-pip python-dev wget && \
 pip install numpy && \
 pip install pandas && \
 cd /data/CGibbs && \
@@ -15,4 +15,5 @@ javac GeneClusteringSplitTL.java && \
 cd /data && \
 mkdir diamond && \
 wget http://github.com/bbuchfink/diamond/releases/download/v0.9.24/diamond-linux64.tar.gz && \
-tar -xvf diamond-linux64.tar.gz -C diamond
+tar -xvf diamond-linux64.tar.gz -C diamond && \
+rm diamond-linux64.tar.gz
