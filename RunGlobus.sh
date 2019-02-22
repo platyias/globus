@@ -4,17 +4,20 @@ mkdir /data/results/$b
 mkdir /data/results/$b/profile
 mkdir /data/results/$b/blast
 
+#Make diamond database
+/data/diamond/diamond makedb --in /data/genomes/$b -d /data/genomes/$b
+
 #Blast Swissprot
-/data/usearch/usearch -ublast /data/genomes/$b -db /data/database/sprot_enzyme_reviewed_ec5.fasta.udb -evalue 5e-2 -userout /data/results/$b/$b.VsSprot2_5e-2_out6_seq.blastp -userfields query+target+ql+tl+id+mism+gaps+qlo+qhi+tlo+thi+evalue+bits+qrow+trow
+/data/diamond/diamond blastp -q /data/genomes/$b -d /data/database/sprot_enzyme_reviewed_ec5.fasta --evalue 5e-2 -o /data/results/$b/$b.VsSprot2_5e-2_out6_seq.blastp --outfmt 6 qseqid sseqid qlen slen pident mismatch gaps qstart qend sstart send evalue bitscore qseq sseq
 
 #Blast Profile
-for a in $(cat /data/database/71_Genomes.txt); do /data/usearch/usearch -ublast /data/genomes/$b -db /data/database/71Genomes/$a -evalue 5e-2 -userout /data/results/$b/profile/$b.TO.$a.blastp -userfields query+target+evalue; done
+for a in $(cat /data/database/71_Genomes.txt); do /data/diamond/diamond blastp -q /data/genomes/$b -d /data/database/71Genomes/$a --evalue 5e-2 -o /data/results/$b/profile/$b.TO.$a.blastp --outfmt 6 qseqid sseqid evalue; done
 
 #Blast Ort Forward
-for a in $(cat /data/database/SwissCluster_Genomes.txt); do /data/usearch/usearch -ublast /data/genomes/$b -db /data/database/ClusterGenomes/$a.pep -evalue 5e-2 -maxhits 5 -userout /data/results/$b/blast/$b.vs.$a.blastp -userfields query+target+ql+tl+id+mism+gaps+qlo+qhi+tlo+thi+evalue+bits; done
+for a in $(cat /data/database/SwissCluster_Genomes.txt); do /data/diamond/diamond blastp -q /data/genomes/$b -d /data/database/ClusterGenomes/$a.pep --evalue 5e-2 --max-target-seqs 5 -o /data/results/$b/blast/$b.vs.$a.blastp --outfmt 6 qseqid sseqid qlen slen pident mismatch gaps qstart qend sstart send evalue bitscore; done
 
 #Blast Ort Reverse
-for a in $(cat /data/database/SwissCluster_Genomes.txt); do /data/usearch/usearch -ublast /data/database/ClusterGenomes/$a.pep -db /data/genomes/$b -evalue 5e-2 -maxhits 5 -userout /data/results/$b/blast/$a.vs.$b.blastp -userfields query+target+ql+tl+id+mism+gaps+qlo+qhi+tlo+thi+evalue+bits; done
+for a in $(cat /data/database/SwissCluster_Genomes.txt); do /data/diamond/diamond blastp -q /data/database/ClusterGenomes/$a.pep -d /data/genomes/$b --evalue 5e-2 --max-target-seqs 5 -o /data/results/$b/blast/$a.vs.$b.blastp --outfmt 6 qseqid sseqid qlen slen pident mismatch gaps qstart qend sstart send evalue bitscore; done
 
 #Parse SwissprotBlast
 python /data/scripts/01-Parse_ublast_outfmt6_2.py $b 
