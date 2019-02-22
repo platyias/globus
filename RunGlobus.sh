@@ -8,7 +8,7 @@ mkdir /data/results/$b/blast
 /data/diamond/diamond makedb --in /data/genomes/$b -d /data/genomes/$b
 
 #Blast Swissprot
-/data/diamond/diamond blastp -q /data/genomes/$b -d /data/database/sprot_enzyme_reviewed_ec5.fasta --evalue 5e-2 -o /data/results/$b/$b.VsSprot2_5e-2_out6_seq.blastp --outfmt 6 qseqid sseqid qlen slen pident mismatch gaps qstart qend sstart send evalue bitscore qseq sseq
+/data/diamond/diamond blastp -q /data/genomes/$b -d /data/database/sprot_enzyme_reviewed_ec5.fasta --evalue 5e-2 -o /data/results/$b/$b.VsSprot2_5e-2_out6_seq.blastp --outfmt 6 qseqid stitle qlen slen pident mismatch gaps qstart qend sstart send evalue bitscore qseq sseq
 
 #Blast Profile
 for a in $(cat /data/database/71_Genomes.txt); do /data/diamond/diamond blastp -q /data/genomes/$b -d /data/database/71Genomes/$a --evalue 5e-2 -o /data/results/$b/profile/$b.TO.$a.blastp --outfmt 6 qseqid sseqid evalue; done
