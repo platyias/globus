@@ -25,22 +25,22 @@ You are now ready to annotate your protein sequences with GLOBUS.
 
 First, copy a multi-fasta file (e.g. sequences.fas) to the genomes folder in the docker container:
 
-$ docker cp sequences.fas :/data/genomes/904306.fas
+$ docker cp sequences.fas container_id:/data/genomes/904306.fas
 
-Replace with the corresponding ID of the container you just created; this can be found by typing:
+Replace container_id with the corresponding ID of the container you just created; this can be found by typing:
 
 $ docker ps
 
 Second, run GLOBUS by typing
 
-$ docker exec /bin/bash -c "/data/RunGlobus.sh sequences.fas"
+$ docker exec container_id /bin/bash -c "/data/RunGlobus.sh sequences.fas"
 
 Third, after GLOBUS finishes, copy GLOBUS results from the docker container:
 
-$ docker cp :/data/results/sequences.fas/sequences.fas.All_P_sorted+Iden.txt globus_out.txt
+$ docker cp container_id:/data/results/sequences.fas/sequences.fas.All_P_sorted+Iden.txt globus_out.txt
 
 Files inside the docker container can also be explored by typing:
 
-$ docker exec -i -t /bin/bash
+$ docker exec -i -t container_id /bin/bash
 
 
