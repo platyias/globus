@@ -1,11 +1,17 @@
 # globus
 GLObal Biochemical reconstruction Using Sampling
 
-Source files to build Docker container using diamond as the sequence aligner.
+This repository contains the source files to build a GLOBUS Docker image using diamond as the sequence aligner. Database files are not included. 
 
-GLOBUS can be run in a docker container (https://www.docker.com/get-started)
+If you use GLOBUS, please cite:
+
+Plata, G., Fuhrer, T., Hsiao, T., Sauer, U., Vitkup, D. 2012. Global probabilistic annotation of metabolic networks enables enzyme discovery. Nat. Chem. Biol. 8:848-854
+
+Code in this repository was contributed by Dr. Jeewoen Sin. 
 
 HOW TO ANNOTATE A GENOME WITH GLOBUS:
+
+GLOBUS can be run in a docker container (https://www.docker.com/get-started)
 
 After docker is installed and running, pull the GLOBUS image by typing on a terminal window:
 
@@ -36,3 +42,5 @@ $ docker cp :/data/results/sequences.fas/sequences.fas.All_P_sorted+Iden.txt glo
 Files inside the docker container can also be explored by typing:
 
 $ docker exec -i -t /bin/bash
+
+
