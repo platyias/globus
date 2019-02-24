@@ -1,11 +1,17 @@
 # globus
 GLObal Biochemical reconstruction Using Sampling
 
-Source files to build Docker container using usearch as the sequence aligner. Due to license restrictions, usearch needs to be manually added to the container by the user.  
+This repository contains source files to build a Docker image using usearch as the sequence aligner. Due to license restrictions, usearch needs to be manually added to a local docker image by the user.   
 
-GLOBUS can be run in a docker container (https://www.docker.com/get-started)
+If you use GLOBUS, please cite:
+
+Plata, G., Fuhrer, T., Hsiao, T., Sauer, U., Vitkup, D. 2012. Global probabilistic annotation of metabolic networks enables enzyme discovery. Nat. Chem. Biol. 8:848-854
+
+Code in this repository was contributed by Dr. Jeewoen Sin. 
 
 HOW TO ANNOTATE A GENOME WITH GLOBUS:
+
+GLOBUS can be run in a docker container (https://www.docker.com/get-started)
 
 After docker is installed and running, pull the GLOBUS image by typing on a terminal window:
 
